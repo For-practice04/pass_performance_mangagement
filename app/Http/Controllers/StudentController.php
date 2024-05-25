@@ -14,6 +14,11 @@ use App\Services\StudentService;
 
 class StudentController extends Controller
 {
+    private $studentService;
+    public function __construct(StudentService $studentService)
+    {
+        $this->studentService = $studentService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +26,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = StudentService::index();
+        $students = $this->studentService->index();
         return view('admissions.list', compact('students'));
     }
 
@@ -44,7 +49,7 @@ class StudentController extends Controller
     public function store(StoreStudentRequest $request)
     {
 
-        StudentService::store($request);
+        $this->studentService->store($request);
 
         return to_route('admissions.index');
     }
@@ -61,7 +66,7 @@ class StudentController extends Controller
         // $admission = StudentService::getAdmissionByStudentId($student->id);
         // $universities = StudentService::getUniversityByUniversityId($admission->university_id);
         // // dd($student);
-        $details = StudentService::show($id);
+        $details = $this->studentService->show($id);
         return view('admissions.show', ['details' => $details]);
         // return view('admissions.show', compact('student'));
     }
@@ -74,7 +79,7 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $editInfo = StudentService::edit($id);
+        $editInfo = $this->studentService->edit($id);
         $student = $editInfo['student'];
         $birthDateYear = $editInfo['birthDateYear'];
         $birthDateMonth = $editInfo['birthDateMonth'];
@@ -92,7 +97,7 @@ class StudentController extends Controller
      */
     public function update(UpdateStudentRequest $request, $id)
     {
-        StudentService::updateStudent($request, $id);
+        $this->studentService->updateStudent($request, $id);
         return to_route('admissions.index');
     }
 
@@ -104,26 +109,26 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        StudentService::destroyStudent($id);
+        $this->studentService->destroyStudent($id);
         return to_route('admissions.index');
     }
 
     public function passRegist($id)
     {
-        $student = StudentService::getById($id);
+        $student = $this->studentService->getById($id);
         // dd($student);
         return view('admissions.pass_regist', compact('student'));
     }
     public function passStore(Request $request)
     {
-        StudentService::passRegist($request);
+        $this->studentService->passRegist($request);
 
         return to_route('admissions.index');
     }
 
     public function passEdit($id)
     {
-        $studentInfo = StudentService::passEdit($id);
+        $studentInfo = $this->studentService->passEdit($id);
         // dd($studentInfo['universities']);
         $universities = $studentInfo['universities'];
         // $universities = json_decode($universities, true);
@@ -134,7 +139,7 @@ class StudentController extends Controller
 
     public function passUpdate(Request $request, $id)
     {
-        StudentService::passUpdate($request, $id);
+        $this->studentService->passUpdate($request, $id);
         // $admission = Admission::find("3");
         // $admission->university_id = 2;
         // $admission->save();
@@ -143,7 +148,7 @@ class StudentController extends Controller
 
     public function passDestroy(Request $request, $id)
     {
-        StudentService::passDestroy($request, $id);
+        $this->studentService->passDestroy($request, $id);
         // $admission = Admission::find("3");
         // $admission->university_id = 2;
         // $admission->save();

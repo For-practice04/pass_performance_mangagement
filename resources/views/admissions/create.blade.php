@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="p-2 w-full">
                                         <div class="relative">
-                                            <label for="name" class="leading-7 text-sm text-gray-600">性別</label><br>
+                                            <label for="gender" class="leading-7 text-sm text-gray-600">性別</label><br>
                                             男:<input type="radio" id="gender" name="gender" value="男" class="mx-1">
                                             女:<input type="radio" id="gender" name="gender" value="女">
                                         </div>

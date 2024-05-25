@@ -17,12 +17,12 @@ class StudentRepository
         return Student::select('id', 'name', 'gender', 'birth_date', 'club')
             ->get();
     }
-    public static function getbyId(int $id): Student
+    public  function getbyId(int $id): Student
     {
         $student = Student::find($id);
         return $student;
     }
-    public static function createStudent(Student $model): Student
+    public function createStudent(Student $model): Student
     {
         $student = Student::create([
             'name' => $model->name,
@@ -33,16 +33,16 @@ class StudentRepository
         ]);
         return $student;
     }
-    public static function updateStudent(Student $model): Student
+    public function updateStudent(Student $model): Student
     {
         $model->save();
         return $model;
     }
-    public static function destroyStudent(Student $model)
+    public function destroyStudent(Student $model)
     {
         $model->delete();
     }
-    public static function createAdmissiion(int $studentId, int $universityID): Admission
+    public function createAdmission(int $studentId, int $universityID): Admission
     {
         $admission = Admission::create([
             'student_id' => $studentId,
@@ -51,7 +51,7 @@ class StudentRepository
         return $admission;
     }
 
-    public static function getAdmissionByStudentId(int $studentId): Collection
+    public function getAdmissionByStudentId(int $studentId): Collection
     {
         $admission = Admission::select('id', 'student_id', 'university_id')
             ->where('student_id', $studentId)
@@ -59,7 +59,7 @@ class StudentRepository
         return $admission;
     }
 
-    public static function getAdmissionByStudentIdAndUniversiyId(int $studentId, int $universityId): Admission
+    public function getAdmissionByStudentIdAndUniversiyId(int $studentId, int $universityId): Admission
     {
         echo ($studentId);
         echo ($universityId);
@@ -79,20 +79,20 @@ class StudentRepository
         return $admission;
     }
 
-    public static function updateAdmission(Admission $admission): Admission
+    public function updateAdmission(Admission $admission): Admission
     {
         // dd($admission);
         $admission->update();
         return $admission;
     }
 
-    public static function destroyAdmission(Admission $admission)
+    public function destroyAdmission(Admission $admission)
     {
         // dd($admission);ls
         $admission->delete();
     }
 
-    public static function getUniversityByUniversityId(int $universityId): University
+    public function getUniversityByUniversityId(int $universityId): University
     {
         $university = University::find($universityId);
         return $university;

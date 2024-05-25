@@ -25,7 +25,7 @@ class UpdateStudentRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:20'],
-            'gender' => ['required', 'string', 'max:5'],
+            'gender' => ['required', 'string', 'max:1'],
             'birth_year' => ['required'],
             'birth_month' => ['required'],
             'birth_day' => ['required'],
